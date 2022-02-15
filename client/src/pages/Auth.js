@@ -39,8 +39,7 @@ export default function Auth() {
             <img src={ImgDumbMerch} className="img-fluid" style={{ width: "264px", height: "264px" }} alt="brand" />
             <div className="text-auth-header mt-4">Easy, Fast and Reliable</div>
             <p className="text-auth-parag mt-3">
-              Go shopping for merchandise, just go to dumb merch <br /> shopping. the biggest merchandise in{" "}
-              <b>Indonesia</b>
+              Go shopping for merchandise, just go to dumb merch <br /> shopping. the biggest merchandise in <b>Indonesia</b>
             </p>
             <div className="mt-5">
               <button onClick={switchLogin} className="btn btn-login px-5">
@@ -52,6 +51,9 @@ export default function Auth() {
             </div>
           </Col>
           <Col md="6">{isRegister ? <Register /> : <Login />}</Col>
+          {/* <Col md="6">
+            <Register />
+          </Col> */}
         </Row>
       </Container>
     </div>
