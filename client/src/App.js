@@ -1,23 +1,20 @@
-import { useContext, useState } from 'react'
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route
-} from "react-router-dom";
-import { UserContext } from './context/userContext'
+import { useContext, useState } from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
+import { UserContext } from "./context/userContext";
 
 import Auth from "./pages/Auth";
 import Shop from "./pages/Shop";
-import Product from './pages/Product';
-import Complain from './pages/Complain';
-import Profile from './pages/Profile';
-import ComplainAdmin from './pages/ComplainAdmin';
-import CategoryAdmin from './pages/CategoryAdmin';
-import ProductAdmin from './pages/ProductAdmin';
-import EditCategoryAdmin from './pages/EditCategoryAdmin';
-import AddCategoryAdmin from './pages/AddCategoryAdmin';
-import AddProductAdmin from './pages/AddProductAdmin';
-import EditProductAdmin from './pages/EditProductAdmin';
+import Product from "./pages/Product";
+import Complain from "./pages/Complain";
+import Profile from "./pages/Profile";
+import ComplainAdmin from "./pages/ComplainAdmin";
+import CategoryAdmin from "./pages/CategoryAdmin";
+import ProductAdmin from "./pages/ProductAdmin";
+import EditCategoryAdmin from "./pages/EditCategoryAdmin";
+import AddCategoryAdmin from "./pages/AddCategoryAdmin";
+import AddProductAdmin from "./pages/AddProductAdmin";
+import EditProductAdmin from "./pages/EditProductAdmin";
 
 function App() {
   return (
