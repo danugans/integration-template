@@ -12,7 +12,7 @@ import CategoryAdmin from "./pages/CategoryAdmin";
 import ProductAdmin from "./pages/ProductAdmin";
 import EditCategoryAdmin from "./pages/EditCategoryAdmin";
 // import AddCategoryAdmin from "./pages/AddCategoryAdmin";
-// import AddProductAdmin from "./pages/AddProductAdmin";
+import AddProductAdmin from "./pages/AddProductAdmin";
 import EditProductAdmin from "./pages/EditProductAdmin";
 
 // Get API config & setAuthToken here ...
@@ -88,7 +88,7 @@ function App() {
       <Route path="/edit-category/:id" component={EditCategoryAdmin} />
       {/* <Route path="/add-category" component={AddCategoryAdmin} /> */}
       <Route path="/product-admin" component={ProductAdmin} />
-      {/* <Route path="/add-product" component={AddProductAdmin} /> */}
+      <Route path="/add-product" component={AddProductAdmin} />
       <Route path="/edit-product/:id" component={EditProductAdmin} />
     </Switch>
   );
