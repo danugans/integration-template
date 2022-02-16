@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Container, Row, Col, Button } from "react-bootstrap";
+import { Container, Row, Col, Button, Alert } from "react-bootstrap";
 import { useHistory } from "react-router";
 
 import NavbarAdmin from "../components/NavbarAdmin";
 
-// Import useMutation and useQuery from react-query here ...
+// Import useMutation from react-query here ...
+import { useMutation } from "react-query";
 
 // Get API config here ...
+import { API } from "../../config/api";
 
 export default function AddProductAdmin() {
   const title = "Product admin";
@@ -19,7 +21,13 @@ export default function AddProductAdmin() {
   const [preview, setPreview] = useState(null); //For image preview
 
   // Create variabel for store data with useState here ...
-
+  const [form, setForm] = useState({
+    image: "",
+    name: "",
+    desc: "",
+    price: "",
+    qty: "",
+  });
   // Fetching category data
   let { data: categories, refetch } = useQuery("categoriesCache", async () => {
     const response = await api.get("/categories");
@@ -59,6 +67,64 @@ export default function AddProductAdmin() {
 
   // Create function for handle insert product data with useMutation here ...
 
+  const handleSubmit = useMutation(async (e) => {
+    try {
+      e.preventDefault();
+
+      const formData = new FormData();
+      formData.set("image", form.image[0], form.image[0].name);
+      formData.set("name", form.name);
+      formData.set("desc", form.desc);
+      formData.set("price", form.price);
+      formData.set("qty", form.qty);
+
+      // Data body
+      const body = JSON.stringify(form);
+
+      // Configuration Content-type
+      const config = {
+        method: "POST",
+        headers: {
+          Authorization: "Basic" + localStorage.token,
+        },
+        body: formData,
+      };
+
+      // Insert data user to database
+      const response = await api.post("/product", config);
+
+      // Notification
+      if (response.status == "success") {
+        const alert = (
+          <Alert variant="success" className="py-1">
+            Success
+          </Alert>
+        );
+        setMessage(alert);
+        setForm({
+          name: "",
+          email: "",
+          password: "",
+        });
+      } else {
+        const alert = (
+          <Alert variant="danger" className="py-1">
+            Failed
+          </Alert>
+        );
+        setMessage(alert);
+      }
+    } catch (error) {
+      const alert = (
+        <Alert variant="danger" className="py-1">
+          Failed
+        </Alert>
+      );
+      setMessage(alert);
+      console.log(error);
+    }
+  });
+
   return (
     <>
       <NavbarAdmin title={title} />
@@ -86,34 +152,10 @@ export default function AddProductAdmin() {
               <label for="upload" className="label-file-add-product">
                 Upload file
               </label>
-              <input
-                type="text"
-                placeholder="Product Name"
-                name="name"
-                onChange={handleChange}
-                className="input-edit-category mt-4"
-              />
-              <textarea
-                placeholder="Product Desc"
-                name="desc"
-                onChange={handleChange}
-                className="input-edit-category mt-4"
-                style={{ height: "130px" }}
-              ></textarea>
-              <input
-                type="number"
-                placeholder="Price (Rp.)"
-                name="price"
-                onChange={handleChange}
-                className="input-edit-category mt-4"
-              />
-              <input
-                type="number"
-                placeholder="Stock"
-                name="qty"
-                onChange={handleChange}
-                className="input-edit-category mt-4"
-              />
+              <input type="text" placeholder="Product Name" name="name" onChange={handleChange} className="input-edit-category mt-4" />
+              <textarea placeholder="Product Desc" name="desc" onChange={handleChange} className="input-edit-category mt-4" style={{ height: "130px" }}></textarea>
+              <input type="number" placeholder="Price (Rp.)" name="price" onChange={handleChange} className="input-edit-category mt-4" />
+              <input type="number" placeholder="Stock" name="qty" onChange={handleChange} className="input-edit-category mt-4" />
               <div className="card-form-input mt-4 px-2 py-1 pb-2">
                 <div className="text-secondary mb-1" style={{ fontSize: "15px" }}>
                   Category
